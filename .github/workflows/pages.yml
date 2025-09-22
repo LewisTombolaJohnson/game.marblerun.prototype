@@ -20,6 +20,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
@@ -31,6 +33,8 @@ jobs:
         run: npm --workspace client run build
         env:
           VITE_SERVER_URL: ${{ secrets.MARBLE_SERVER_URL }}
+          # Provide repository name so Vite base path resolves correctly
+          GITHUB_REPOSITORY: ${{ github.repository }}
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:

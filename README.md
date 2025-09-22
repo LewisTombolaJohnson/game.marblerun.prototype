@@ -67,6 +67,22 @@ VITE_SERVER_URL="https://marble-backend.example" npm --workspace client run buil
 ```
 Then push the `client/dist` contents to GitHub Pages.
 
+### Using the Included GitHub Pages Workflow
+The workflow `.github/workflows/pages.yml` now:
+- Configures Pages
+- Builds the client with `vite build`
+- Derives a base path from the repo name so assets load at `https://<user>.github.io/<repo>/`
+
+If you fork or rename the repository and want to force root deployment, set an env var `BUILD_BASE=/` (add under the build step `env:`) to override.
+
+### Why Deployment Previously Failed
+Earlier the client build script used `tsc -b`, which only emitted raw TypeScript output (no bundling, no `index.html` asset rewriting). GitHub Pages received unbundled modules that the browser couldn't locate under the repository subpath, leading to 404s. Switching to `vite build` produces hashed asset files and rewrites `index.html` to reference them with the correct base path.
+
+### Environment Variables in Workflow
+`MARBLE_SERVER_URL` secret (optional) injects `VITE_SERVER_URL` so the static client knows where your WebSocket server lives.
+
+If your server also sits behind HTTPS and a different domain, ensure CORS is open (the server currently allows `*`).
+
 ## Environment Variables
 | Variable | Purpose | Default |
 |----------|---------|---------|

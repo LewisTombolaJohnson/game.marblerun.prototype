@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Marble Racer</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <style>
+    body { margin:0; font-family: system-ui, sans-serif; background:#111; color:#eee; }
+    #ui { position:fixed; top:0; left:0; padding:12px; z-index:10; background:rgba(0,0,0,0.4); backdrop-filter: blur(4px); }
+    input, button { padding:6px 10px; margin:4px 0; font-size:14px; }
+    #lobbyPlayers span { display:block; }
+    #gameCanvas { width:100vw; height:100vh; display:block; }
+    .hidden { display:none !important; }
+    #countdown { font-size:20px; margin-top:8px; }
+    #results { margin-top:12px; }
+  /* Name tags removed (drawn directly to canvas) */
+  </style>
+  <script type="module" crossorigin src="/game.marblerun.prototype/assets/index-DqmvxSdu.js"></script>
+</head>
+<body>
+  <canvas id="gameCanvas"></canvas>
+  <div id="ui">
+    <div id="screen-lobby-select">
+      <h2>Marble Racer</h2>
+      <div>
+        <input id="playerName" placeholder="Your name" maxlength="16" />
+      </div>
+      <div>
+        <button id="createLobbyBtn">Create Lobby</button>
+      </div>
+      <div>
+        <input id="joinCode" placeholder="Code" maxlength="6" style="text-transform:uppercase" />
+        <button id="joinLobbyBtn">Join Lobby</button>
+      </div>
+    </div>
+    <div id="screen-lobby" class="hidden">
+      <h3>Lobby <span id="lobbyCode"></span></h3>
+      <div id="lobbyStatus"></div>
+      <div id="lobbyPlayers"></div>
+      <div style="margin-top:6px;">
+        <button id="startNowBtn">Start Race</button>
+        <button id="resetBtn">Reset</button>
+      </div>
+    </div>
+    <div id="screen-race" class="hidden">
+      <h3>Racing...</h3>
+      <div id="raceTimer"></div>
+      <div style="margin-top:6px;">
+        <button id="resetBtnRace">Reset</button>
+      </div>
+      <div id="results"></div>
+    </div>
+  </div>
+</body>
+</html>

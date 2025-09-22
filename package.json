@@ -1,0 +1,17 @@
+{
+  "name": "marble-racer",
+  "private": true,
+  "version": "0.1.0",
+  "workspaces": ["server", "client", "shared"],
+  "scripts": {
+    "dev": "concurrently \"npm:dev:server\" \"npm:dev:client\"",
+    "dev:server": "npm --workspace server run dev",
+    "dev:client": "npm --workspace client run dev",
+    "dev:quick": "COUNTDOWN_SECONDS=5 concurrently \"npm:dev:server\" \"npm:dev:client\"",
+    "build": "npm --workspace server run build && npm --workspace client run build"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2",
+    "typescript": "^5.4.0"
+  }
+}

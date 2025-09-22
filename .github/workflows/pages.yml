@@ -35,6 +35,10 @@ jobs:
           VITE_SERVER_URL: ${{ secrets.MARBLE_SERVER_URL }}
           # Provide repository name so Vite base path resolves correctly
           GITHUB_REPOSITORY: ${{ github.repository }}
+      - name: Add 404 fallback & list dist
+        run: |
+          cp client/dist/index.html client/dist/404.html || true
+          echo "Dist contents:" && find client/dist -maxdepth 2 -type f -print
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
